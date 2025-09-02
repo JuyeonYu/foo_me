@@ -16,6 +16,21 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+
+    qrcode = RQRCode::QRCode.new(@post.content)
+    @qr_png = qrcode.as_png(
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: "black",
+      fill: "white",
+      module_px_size: 6, # 6px * 모듈 = 전체 크기
+      size: 220
+    )
+  end
+
   private
 
   def post_params

@@ -49,6 +49,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # qrcode
+  gem "rqrcode"
+  gem "chunky_png"
 end
 
 group :development do
