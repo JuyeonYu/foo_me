@@ -1,0 +1,17 @@
+<nav>
+    <%= link_to "home", posts_path %>
+</nav>
+
+<%= form_with model: @post, url: posts_path, local: true do |f| %>
+    <%= f.label :content, "내용" %>
+    <%= f.text_area :content %>
+    <%= f.submit "등록" %>
+<% end %>
+
+<%= @posts.each do |post| %>
+    <ol>
+        <li>
+            <%= post.content %>
+        </li>
+    </ol>
+<% end %>
