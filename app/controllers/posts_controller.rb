@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to posts_path, notice: "등록 완료!"
+      redirect_to @post, notice: "등록 완료!"
     else
       @posts = Post.all
       flash.now[:alert] = "저장에 실패했어요"

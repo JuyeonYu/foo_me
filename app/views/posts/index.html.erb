@@ -5,7 +5,6 @@
 
 <ul>
     <%= @posts.each do |post| %>
-
         <li>
             <%= link_to post.content, post_path(post) %>
             <%= post.formatted_created_at %>
@@ -14,7 +13,7 @@
     <% end %>
 </ul>
 
-<%= form_with model: @post, url: posts_path, local: true do |f| %>
+<%= form_with model: @post, local: true do |f| %>
     <%= f.label :content, "내용" %>
     <%= f.text_area :content %>
     <%= f.submit "등록" %>
@@ -29,22 +28,3 @@
       console.error("복사 실패:", err);
     });
   }
-
-  function showToast(message) {
-    let toast = document.createElement("div");
-    toast.textContent = message;
-    toast.style.position = "fixed";
-    toast.style.bottom = "30px";
-    toast.style.left = "50%";
-    toast.style.transform = "translateX(-50%)";
-    toast.style.backgroundColor = "rgba(0,0,0,0.7)";
-    toast.style.color = "#fff";
-    toast.style.padding = "10px 20px";
-    toast.style.borderRadius = "5px";
-    toast.style.zIndex = "1000";
-    document.body.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 2000);
-  }
-</script>
