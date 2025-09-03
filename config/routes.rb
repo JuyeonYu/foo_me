@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "posts#index"
-  resources :posts, only: [ :index, :create, :show ]
+  resources :posts, only: [ :index, :create, :show, :new ] do
+    post :verify_password, on: :member
+  end
 end

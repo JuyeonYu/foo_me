@@ -1,23 +1,22 @@
 <nav>
-    <%= link_to "home", posts_path %>
+    <%= link_to "new foo", new_post_path %>
+    <%= link_to "foos", posts_path %>
 </nav>
 
 
 <ul>
     <%= @posts.each do |post| %>
         <li>
-            <%= link_to post.content, post_path(post) %>
+            <%= link_to post_content(post), post_path(post) %>
             <%= post.formatted_created_at %>
-            <button type="button" data-controller="clipboard" data-clipboard-text-value="<%= post.content %>" data-action="click->clipboard#copy">복사하기</button>
+            <% if show_copy_button?(post) %>
+              <button type="button" data-controller="clipboard" data-clipboard-text-value="<%= post.content %>" data-action="click->clipboard#copy">복사하기</button>
+            <% end %>
         </li>
     <% end %>
 </ul>
 
-<%= form_with model: @post, local: true do |f| %>
-    <%= f.label :content, "내용" %>
-    <%= f.text_area :content %>
-    <%= f.submit "등록" %>
-<% end %>
+
 
 <script>
 

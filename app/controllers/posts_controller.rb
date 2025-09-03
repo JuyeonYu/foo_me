@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+  end
+
+  def new
     @post = Post.new
   end
 
@@ -19,6 +22,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
+    if @post.secret? && !session["post_#{@post.id}_unlocked"]
+      return render :password
+    end
+
     qrcode = RQRCode::QRCode.new(@post.content)
     @qr_png = qrcode.as_png(
       bit_depth: 1,
@@ -31,9 +38,20 @@ class PostsController < ApplicationController
     )
   end
 
+  def verify_password
+    @post = Post.find(params[:id])
+    if params[:password] == @post.password
+      session["post_#{@post.id}_unlocked"] = true
+      redirect_to post_path(@post), notice: "비밀번호가 맞습니다."
+    else
+      flash.now[:alert] = "비밀번호가 틀렸습니다."
+      render :password
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :password)
   end
 end
