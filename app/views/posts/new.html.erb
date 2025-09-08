@@ -6,14 +6,14 @@
     
 
     <p>
-        <%= f.label :category, "유효 기간" %>
-        <%= f.select :category, options_for_select([["읽자마자", 0], ["1분", 1], ["5분", 5]]) %>
+        <%= f.label :expire_type, "유효 기간" %>
+        <%= f.select :expire_type, options_for_select([["없음", 0], ["읽자마자삭제", 1]]) %>
     </p>
 
     <p>
         <%= f.label :password, "비밀번호" %>
         <%= f.text_field :password %>
-    </p>
+    </p>제
 
     <%= f.submit "등록" %>
 <% end %>

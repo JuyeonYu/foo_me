@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: "등록 완료!"
+      redirect_to @post, notice: @post.expire_type == 0 ? "등록 완료!" : "등록 완료! 읽자마자 삭제"
     else
       @posts = Post.all
       flash.now[:alert] = "저장에 실패했어요"
@@ -36,6 +36,12 @@ class PostsController < ApplicationController
       module_px_size: 6, # 6px * 모듈 = 전체 크기
       size: 220
     )
+
+
+    if @post.expire_type == 1
+      @post.destroy
+      flash.now[:alert] = "바로."
+    end
   end
 
   def verify_password
@@ -52,6 +58,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :password)
+    params.require(:post).permit(:content, :password, :expire_type)
   end
 end
