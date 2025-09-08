@@ -87,4 +87,9 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+
+  # config/environments/production.rb
+  config.consider_all_requests_local = false
+  config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
 end
