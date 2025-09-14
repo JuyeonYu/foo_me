@@ -27,6 +27,11 @@
       <div class="flash <%= key %>"><%= message %></div>
     <% end %>
 
+    <nav>
+        <%= link_to "new foo", new_post_path %>
+        <%= link_to "foos", posts_path %>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
