@@ -53,6 +53,11 @@ group :development, :test do
   # qrcode
   gem "rqrcode"
   gem "chunky_png"
+
+  # login
+  gem 'devise'
+  gem 'omniauth-google-oauth2'              # 구글 OAuth 전략
+  gem 'omniauth-rails_csrf_protection', '~> 1.0' # OmniAuth 2.x CSRF 보호
 end
 
 group :development do

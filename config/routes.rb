@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :posts, only: [ :index, :create, :show, :new ] do
     post :verify_password, on: :member
   end
+
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

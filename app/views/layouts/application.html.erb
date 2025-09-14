@@ -30,6 +30,18 @@
     <nav>
         <%= link_to "new foo", new_post_path %>
         <%= link_to "foos", posts_path %>
+
+        <% if user_signed_in? %>
+          <span>
+            <%= (current_user.name.presence || current_user.email) %>님
+          </span>
+          <%= button_to "로그아웃", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= button_to "Google로 로그인",
+              user_google_oauth2_omniauth_authorize_path,
+              method: :post,
+              data: { turbo: false } %>
+        <% end %>
     </nav>
 
     <%= yield %>
