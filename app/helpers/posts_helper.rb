@@ -6,4 +6,8 @@ module PostsHelper
   def show_copy_button?(post)
     !post.secret?
   end
+
+  def display_user(user)
+    user&.name || "익명"
+  end
 end

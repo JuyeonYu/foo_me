@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       redirect_to @post, notice: @post.expire_type == 0 ? "등록 완료!" : "등록 완료! 읽자마자 삭제"

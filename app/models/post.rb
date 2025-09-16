@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   def secret?
     password.present?
   end
+
+  belongs_to :user, optional: true
 end
