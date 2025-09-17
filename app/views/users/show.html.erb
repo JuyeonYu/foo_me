@@ -1,0 +1,13 @@
+<%= @user.name %>
+<h1> my foos </h1>
+<%= @user.posts.each do |post| %>
+        <li>
+            <%= link_to post_content(post), post_path(post) %>
+            <%= post.formatted_created_at %>
+            
+            <% if show_copy_button?(post) %>
+              <button type="button" data-controller="clipboard" data-clipboard-text-value="<%= post.content %>" data-action="click->clipboard#copy">복사하기</button>
+            <% end %>
+        </li>
+
+<% end %>
